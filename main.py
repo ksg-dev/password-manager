@@ -10,7 +10,7 @@ FONT_NAME = "Calibri"
 window = Tk()
 window.title("Password Manger")
 # window.minsize(width=240, height=240)
-window.config(padx=20, pady=20)
+window.config(padx=50, pady=50)
 
 # Canvas set up
 canvas = Canvas(width=200, height=200)
