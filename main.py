@@ -25,16 +25,16 @@ web_label = Label(text="Website:")
 web_label.grid(column=0, row=1)
 
 # Entry - website input
-web_input = Entry(width=36)
-web_input.grid(column=1, row=1, columnspan=2)
+web_input = Entry(width=43)
+web_input.grid(column=1, row=1, columnspan=2, sticky="E")
 
 # Label - email/username
 usr_label = Label(text="Email/Username:")
 usr_label.grid(column=0, row=2)
 
 # Entry - email/username input
-usr_input = Entry(width=36)
-usr_input.grid(column=1, row=2, columnspan=2)
+usr_input = Entry(width=43)
+usr_input.grid(column=1, row=2, columnspan=2, sticky="E")
 
 # Label - password
 pw_label = Label(text="Password:")
@@ -42,16 +42,16 @@ pw_label.grid(column=0, row=3)
 
 # Entry - password input
 pw_input = Entry(width=21)
-pw_input.grid(column=1, row=3)
+pw_input.grid(column=1, row=3, sticky="e", padx=20)
 
 
 # Buttons
 # Generate password
 generate_button = Button(text="Generate Password")
-generate_button.grid(column=2, row=3)
+generate_button.grid(column=2, row=3, sticky="E")
 
 # Add
 add_button = Button(text="Add", width=36)
-add_button.grid(column=1, row=4, columnspan=2)
+add_button.grid(column=1, row=4, columnspan=2, sticky="E")
 
 window.mainloop()
