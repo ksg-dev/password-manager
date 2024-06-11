@@ -10,9 +10,9 @@ def save():
     website = web_input.get()
     usr = usr_input.get()
     pw = pw_input.get()
-    login = website + " | " + usr + " | " + pw + "\n"
     with open("data.txt", mode="a") as file:
-        file.write(login)
+        file.write(f"{website} | {usr} | {pw}\n")
+    # clear website / pw fields
     web_input.delete(0, END)
     pw_input.delete(0, END)
 
