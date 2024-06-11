@@ -13,8 +13,8 @@ def save():
     login = website + " | " + usr + " | " + pw + "\n"
     with open("data.txt", mode="a") as file:
         file.write(login)
-    web_input.delete(0, len(website))
-    pw_input.delete(0, len(pw))
+    web_input.delete(0, END)
+    pw_input.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Window set up
