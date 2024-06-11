@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from password import generator
 import pyperclip
+import json
 
 FONT_NAME = "Calibri"
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -20,6 +21,14 @@ def save():
     usr = usr_input.get()
     pw = pw_input.get()
 
+    # create new dict for data storage
+    new_data = {
+        website: {
+            "email": usr,
+            "password": pw,
+        }
+    }
+
     # Validate no empty fields, warn user if field empty
     if not website or not pw:
         messagebox.showinfo(title="Missing Field(s)", message="Oh no! You left something blank.")
@@ -29,12 +38,36 @@ def save():
         is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {usr} \n"
                                                               f"Password: {pw} \nIs it ok to save?")
 
+        # changing file type to json file, separate read/write
         if is_ok:
-            with open("data.txt", mode="a") as file:
-                file.write(f"{website} | {usr} | {pw}\n")
-            # clear website / pw fields
-            web_input.delete(0, END)
-            pw_input.delete(0, END)
+            try:
+                with open("data.json", "r") as file:
+                    # Reading old data
+                    data = json.load(file)
+
+            except FileNotFoundError:
+                with open("data.json", "w") as file:
+                    # Create file and write to file
+                    json.dump(new_data, file, indent=4)
+
+            else:
+                # Updating old data w new data
+                data.update(new_data)
+
+                with open("data.json", "w") as file:
+                    # Saving updated data
+                    json.dump(data, file, indent=4)
+
+            finally:
+                # clear website / pw fields
+                web_input.delete(0, END)
+                pw_input.delete(0, END)
+
+
+# ---------------------------- SEARCH PASSWORDS ------------------------------- #
+
+def search():
+    website = web_input.get()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -58,8 +91,8 @@ web_label = Label(text="Website:")
 web_label.grid(column=0, row=1)
 
 # Entry - website input
-web_input = Entry(width=43)
-web_input.grid(column=1, row=1, columnspan=2, sticky="E")
+web_input = Entry(width=21)
+web_input.grid(column=1, row=1, sticky="E", padx=20)
 # call focus so cursor starts in entry field
 web_input.focus()
 
@@ -92,5 +125,8 @@ generate_button.grid(column=2, row=3, sticky="E")
 add_button = Button(text="Add", width=36, command=save)
 add_button.grid(column=1, row=4, columnspan=2, sticky="E")
 
+# Search button
+search_button = Button(text="Search", command=search, width=14)
+search_button.grid(column=2, row=1, sticky="E")
 
 window.mainloop()
