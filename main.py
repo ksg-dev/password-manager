@@ -76,10 +76,10 @@ def search():
         email_lu = data[website]["email"]
         pass_lu = data[website]["password"]
 
+        messagebox.showinfo(title=website, message=f"Email: {email_lu} \nPassword: {pass_lu}")
 
-
-    except FileNotFoundError:
-        print("file not found error")
+    except KeyError:
+        messagebox.showinfo(title="Add password?", message=f"No credentials found for {website}.\nClick OK to add")
 
         # creds = {"Email":"Password" for (key, value) in data.items()}
         # print(f"creds: {creds}")
