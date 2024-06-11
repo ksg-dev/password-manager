@@ -40,19 +40,28 @@ def save():
 
         # changing file type to json file, separate read/write
         if is_ok:
-            with open("data.json", "r") as file:
-                # Reading old data
-                data = json.load(file)
+            try:
+                with open("data.json", "r") as file:
+                    # Reading old data
+                    data = json.load(file)
+
+            except FileNotFoundError:
+                with open("data.json", "w") as file:
+                    # Create file and write to file
+                    json.dump(new_data, file, indent=4)
+
+            else:
                 # Updating old data w new data
                 data.update(new_data)
 
-            with open("data.json", "w") as file:
-                # Saving updated data
-                json.dump(data, file, indent=4)
+                with open("data.json", "w") as file:
+                    # Saving updated data
+                    json.dump(data, file, indent=4)
 
-            # clear website / pw fields
-            web_input.delete(0, END)
-            pw_input.delete(0, END)
+            finally:
+                # clear website / pw fields
+                web_input.delete(0, END)
+                pw_input.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
