@@ -69,20 +69,23 @@ def save():
 def search():
     website = web_input.get().title()
 
-    with open("data.json") as file:
-        data = json.load(file)
-
     try:
-        email_lu = data[website]["email"]
-        pass_lu = data[website]["password"]
+        with open("data.json") as file:
+            data = json.load(file)
 
-        messagebox.showinfo(title=website, message=f"Email: {email_lu} \nPassword: {pass_lu}")
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message=f"No data file found.\nClick OK to start adding passwords")
+    else:
+        try:
+            email_lu = data[website]["email"]
+            pass_lu = data[website]["password"]
 
-    except KeyError:
-        messagebox.showinfo(title="Add password?", message=f"No credentials found for {website}.\nClick OK to add")
+            messagebox.showinfo(title=website, message=f"Email: {email_lu} \nPassword: {pass_lu}")
 
-        # creds = {"Email":"Password" for (key, value) in data.items()}
-        # print(f"creds: {creds}")
+        except KeyError:
+            messagebox.showinfo(title="Add password?", message=f"No credentials found for {website}.\nClick OK to add")
+
+
 
 
 # ---------------------------- UI SETUP ------------------------------- #
