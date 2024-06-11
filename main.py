@@ -12,16 +12,21 @@ def save():
     usr = usr_input.get()
     pw = pw_input.get()
 
-    # Check details and confirm save in messagebox
-    is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {usr} \n"
-                                                  f"Password: {pw} \nIs it ok to save?")
+    # Validate no empty fields, warn user if field empty
+    if not website or not pw:
+        missing_fields = messagebox.showinfo(title="Missing Field(s)", message="Oh no! You left something blank.")
 
-    if is_ok:
-        with open("data.txt", mode="a") as file:
-            file.write(f"{website} | {usr} | {pw}\n")
-        # clear website / pw fields
-        web_input.delete(0, END)
-        pw_input.delete(0, END)
+    else:
+        # Check details and confirm save in messagebox
+        is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {usr} \n"
+                                                      f"Password: {pw} \nIs it ok to save?")
+
+        if is_ok:
+            with open("data.txt", mode="a") as file:
+                file.write(f"{website} | {usr} | {pw}\n")
+            # clear website / pw fields
+            web_input.delete(0, END)
+            pw_input.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Window set up
@@ -29,6 +34,7 @@ window = Tk()
 window.title("Password Manger")
 # window.minsize(width=240, height=240)
 window.config(padx=50, pady=50)
+
 
 # Canvas set up
 canvas = Canvas(width=200, height=200)
@@ -47,6 +53,7 @@ web_input = Entry(width=43)
 web_input.grid(column=1, row=1, columnspan=2, sticky="E")
 # call focus so cursor starts in entry field
 web_input.focus()
+
 
 # Label - email/username
 usr_label = Label(text="Email/Username:")
@@ -75,5 +82,6 @@ generate_button.grid(column=2, row=3, sticky="E")
 # Add
 add_button = Button(text="Add", width=36, command=save)
 add_button.grid(column=1, row=4, columnspan=2, sticky="E")
+
 
 window.mainloop()
