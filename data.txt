@@ -1,1 +1,3 @@
 FaceBook | ksg.dev.data@gmail.com | test111
+Amazon | ksg.dev.data@gmail.com | test222
+Test | ksg.dev.data@gmail.com | testing102930
