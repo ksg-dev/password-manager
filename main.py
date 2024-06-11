@@ -17,7 +17,7 @@ def fill_password():
 
 
 def save():
-    website = web_input.get()
+    website = web_input.get().title()
     usr = usr_input.get()
     pw = pw_input.get()
 
@@ -67,7 +67,22 @@ def save():
 # ---------------------------- SEARCH PASSWORDS ------------------------------- #
 
 def search():
-    website = web_input.get()
+    website = web_input.get().title()
+
+    with open("data.json") as file:
+        data = json.load(file)
+
+    try:
+        email_lu = data[website]["email"]
+        pass_lu = data[website]["password"]
+
+
+
+    except FileNotFoundError:
+        print("file not found error")
+
+        # creds = {"Email":"Password" for (key, value) in data.items()}
+        # print(f"creds: {creds}")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
