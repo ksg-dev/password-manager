@@ -5,6 +5,15 @@ FONT_NAME = "Calibri"
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
+
+def save():
+    website = web_input.get()
+    usr = usr_input.get()
+    pw = pw_input.get()
+    login = website + " | " + usr + " | " + pw + "\n"
+    with open("data.txt", mode="a") as file:
+        file.write(login)
+
 # ---------------------------- UI SETUP ------------------------------- #
 # Window set up
 window = Tk()
@@ -27,6 +36,8 @@ web_label.grid(column=0, row=1)
 # Entry - website input
 web_input = Entry(width=43)
 web_input.grid(column=1, row=1, columnspan=2, sticky="E")
+# call focus so cursor starts in entry field
+web_input.focus()
 
 # Label - email/username
 usr_label = Label(text="Email/Username:")
@@ -35,6 +46,8 @@ usr_label.grid(column=0, row=2)
 # Entry - email/username input
 usr_input = Entry(width=43)
 usr_input.grid(column=1, row=2, columnspan=2, sticky="E")
+# Auto-populate entry field
+usr_input.insert(0, "ksg.dev.data@gmail.com")
 
 # Label - password
 pw_label = Label(text="Password:")
@@ -51,7 +64,7 @@ generate_button = Button(text="Generate Password")
 generate_button.grid(column=2, row=3, sticky="E")
 
 # Add
-add_button = Button(text="Add", width=36)
+add_button = Button(text="Add", width=36, command=save)
 add_button.grid(column=1, row=4, columnspan=2, sticky="E")
 
 window.mainloop()
