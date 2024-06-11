@@ -22,12 +22,12 @@ def save():
 
     # Validate no empty fields, warn user if field empty
     if not website or not pw:
-        missing_fields = messagebox.showinfo(title="Missing Field(s)", message="Oh no! You left something blank.")
+        messagebox.showinfo(title="Missing Field(s)", message="Oh no! You left something blank.")
 
     else:
         # Check details and confirm save in messagebox
         is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {usr} \n"
-                                                      f"Password: {pw} \nIs it ok to save?")
+                                                              f"Password: {pw} \nIs it ok to save?")
 
         if is_ok:
             with open("data.txt", mode="a") as file:
@@ -35,6 +35,7 @@ def save():
             # clear website / pw fields
             web_input.delete(0, END)
             pw_input.delete(0, END)
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Window set up
@@ -70,7 +71,7 @@ usr_label.grid(column=0, row=2)
 # Entry - email/username input
 usr_input = Entry(width=43)
 usr_input.grid(column=1, row=2, columnspan=2, sticky="E")
-# Auto-populate entry field
+# Populate entry field
 usr_input.insert(0, "ksg.dev.data@gmail.com")
 
 # Label - password
