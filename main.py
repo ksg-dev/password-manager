@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 FONT_NAME = "Calibri"
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -10,11 +11,17 @@ def save():
     website = web_input.get()
     usr = usr_input.get()
     pw = pw_input.get()
-    with open("data.txt", mode="a") as file:
-        file.write(f"{website} | {usr} | {pw}\n")
-    # clear website / pw fields
-    web_input.delete(0, END)
-    pw_input.delete(0, END)
+
+    # Check details and confirm save in messagebox
+    is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {usr} \n"
+                                                  f"Password: {pw} \nIs it ok to save?")
+
+    if is_ok:
+        with open("data.txt", mode="a") as file:
+            file.write(f"{website} | {usr} | {pw}\n")
+        # clear website / pw fields
+        web_input.delete(0, END)
+        pw_input.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Window set up
