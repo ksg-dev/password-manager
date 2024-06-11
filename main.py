@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from password import generator
+import pyperclip
 
 FONT_NAME = "Calibri"
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -9,6 +10,7 @@ FONT_NAME = "Calibri"
 def fill_password():
     gen_password = generator()
     pw_input.insert(0, gen_password)
+    pyperclip.copy(gen_password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
