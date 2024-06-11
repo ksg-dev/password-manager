@@ -1,8 +1,14 @@
 from tkinter import *
 from tkinter import messagebox
+from password import generator
 
 FONT_NAME = "Calibri"
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
+
+def fill_password():
+    gen_password = generator()
+    pw_input.insert(0, gen_password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
@@ -76,7 +82,7 @@ pw_input.grid(column=1, row=3, sticky="e", padx=20)
 
 # Buttons
 # Generate password
-generate_button = Button(text="Generate Password")
+generate_button = Button(text="Generate Password", command=fill_password)
 generate_button.grid(column=2, row=3, sticky="E")
 
 # Add
